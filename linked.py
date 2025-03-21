@@ -15,7 +15,7 @@ class Node(object):
     def __str__(self):
         return '<' + ', '.join([str(x) for x in self]) + ">"
 
-    def to_list(self):        
+    def to_list(self):
         return [x for x in self]
 
     def __repr__(self):
@@ -35,6 +35,7 @@ class Node(object):
         while ptr.next:
             ptr = ptr.next
         ptr.next = Node(data, None)
+        return self
 
     @staticmethod
     def insert(data , ptr):
@@ -53,6 +54,21 @@ class Node(object):
             return ptr
         else:
             return Node.insert(ptr.data, Node.sort(ptr.next))
+
+    def reverse(self):
+        if self is None:
+            return None
+        elif self.next is None:
+            return Node(self.data, None)
+        else:
+            return self.next.reverse().add_tail(self.data)
+
+    def __len__(self):
+        if self is None:
+            return 0
+        if self.next is None:
+            return 1
+        return 1 + self.next.__len__()
 
 def main():
 
@@ -73,14 +89,18 @@ def main():
     for x in [6, 10, 2, 4, 8, 12]:
         l2 = Node.insert(x, l2)
 
-    print(l2)
+    print(f'l2 = {l2}')
     #print(Node.sort(l1).__repr__())
     l1 = Node.delete(18, l1)
     print(l1)
     print('\n', '-+-' * 20, '\n')
     print(l1)
     print(l1.to_list())
-
+    print('-='*20)
+    print(f'l2 = {l2}')
+    print(f'reverse of l2 = {l2.reverse()}')
+    print(f'l2 = {l2}')
+    print(l2.__len__())
 
 if __name__ == "__main__":
     main()
