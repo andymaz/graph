@@ -101,6 +101,7 @@ def main():
     print(f'reverse of l2 = {l2.reverse()}')
     print(f'l2 = {l2}')
     print(l2.__len__())
+    print(l2.__len__())
 
 if __name__ == "__main__":
     main()
